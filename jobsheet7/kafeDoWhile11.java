@@ -11,22 +11,29 @@ public class kafeDoWhile11 {
         int hargaRoti=20000;
 
         do {
-            System.out.println("masukkan nama pelanggan (ketik 'batal'untuk keluar) : ");
+            System.out.print("\nmasukkan nama pelanggan (ketik 'batal'untuk keluar) : ");
             namaPelanggan = sc.nextLine();
             if (namaPelanggan.equalsIgnoreCase("batal")) {
                 System.out.println("transaksi dibatalkan.");
+                System.out.println("semua transaksi selesai.");
                 break;
             }
-            System.out.println("jumlah kopi:");
+            System.out.print("jumlah kopi:");
             kopi = sc.nextInt();
-            System.out.println("jumlah teh:");
+            System.out.print("jumlah teh:");
             teh = sc.nextInt();
-            System.out.println("jumlah roti:");
+            System.out.print("jumlah roti:");
             roti = sc.nextInt();
             totalHarga = (kopi * hargaKopi) + (teh * hargaTeh) + (roti * hargaRoti);
-            System.out.println("total yang harus dibayar : Rp " + totalHarga);
+            System.out.print("total yang harus dibayar : Rp " + totalHarga);
             sc.nextLine(); 
         } while (true);
     }
     
 }
+// jawaban pertanyaan
+//1.Perulangan do-while tetap berjalan sebanyak 1 kali, meskipun input pertama adalah "batal".
+//2.Perintah break saat namaPelanggan.equalsIgnoreCase("batal") terpenuhi.
+//3.Fungsi dari penggunaan nilai true pada kondisi do-while adalah untuk membuat perulangan berjalan terus-menerus (infinite loop) hingga dihentikan dengan break.
+//4.Perulangan do-while tetap berjalan karena kondisinya true, dan dihentikan oleh input pengguna (yaitu saat mengetik "batal") dengan perintah break.
+//  Tidak butuh inisialisasi atau update karena perulangan tidak dikontrol oleh variabel penghitung.
