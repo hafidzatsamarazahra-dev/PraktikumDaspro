@@ -4,6 +4,11 @@ public class siakad11 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Masukkan jumlah mahasiswa: ");
+        int jumlahMhs = sc.nextInt();
+        System.out.print("Masukkan jumlah mata kuliah: ");
+        int jumlahMatkul = sc.nextInt();
+
         int[][] nilai = new int[4][3];
 
         for (int i = 0; i < nilai.length; i++) {
