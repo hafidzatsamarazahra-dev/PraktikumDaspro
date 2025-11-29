@@ -1,9 +1,10 @@
 package jobsheet11;
 
-import java.lang.reflect.Parameter;
+import java.util.Scanner;
 
 public class kafe11 {
     public static void menu(String namaPelanggan,boolean isMember, String kodePromo) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("selamat datang" + namaPelanggan + "!");
 
         if (isMember) {
@@ -27,9 +28,26 @@ public class kafe11 {
         System.out.println("6. mie goreng - Rp 18.000");
         System.out.println("===========================");
         System.out.println("Silahkan pilih menu yang anda inginkan!");
+        System.out.print("\nMasukkan nomor menu yang ingin anda pesan: ");
+        int pilihanMenu = sc.nextInt();
+        System.out.print("Masukkan jumlah item yang ingin anda pesan: ");
+        int banyakItem = sc.nextInt();
+
+        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem);
+
+        System.out.println("Total harga untuk pesanan anda: Rp " + totalHarga);
+
     }
     public static void main(String[] args) {
         menu("Budi", true, "DISKON30");
+
+    }
+
+    public static int hitungTotalHarga(int pilihanMenu,int banyakItem ){
+        int [] hargaItems = {15000,20000,22000,12000,10000,18000};
+
+        int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+        return hargaTotal;
 
     }
     
