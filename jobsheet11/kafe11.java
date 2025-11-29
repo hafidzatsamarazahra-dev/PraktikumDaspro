@@ -3,55 +3,71 @@ package jobsheet11;
 import java.util.Scanner;
 
 public class kafe11 {
-    public static void menu(String namaPelanggan,boolean isMember, String kodePromo) {
+
+    public static void menu(String namaPelanggan, boolean isMember, String kodePromo) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("selamat datang" + namaPelanggan + "!");
+        System.out.println("Selamat datang " + namaPelanggan + "!");
 
         if (isMember) {
-            System.out.println("Anda adalah member,dapatkan diskon 10% untuk setiap pembelian!");
-        }
-
-        if (kodePromo.equals("DISKON50")) {
-            System.out.println("Kode promo valid: Anda mendapatkan diskon 50%!");
-        } else if (kodePromo.equals("DISKON30")) {
-            System.out.println("Kode promo valid: Anda mendapatkan diskon 30%!");
-        } else {
-            System.out.println("Kode promo invalid.");
+            System.out.println("Anda adalah member, dapatkan diskon 10% untuk setiap pembelian!");
         }
 
         System.out.println("=== MENU RESTO KAFE ===");
-        System.out.println("1. kopi hitam - Rp 15.000");
-        System.out.println("2. cappucino - Rp 20.000");
-        System.out.println("3. latte - Rp 22.000");
-        System.out.println("4. teh tarik - Rp 12.000");
-        System.out.println("5. roti bakar - Rp 10.000");
-        System.out.println("6. mie goreng - Rp 18.000");
+        System.out.println("1. Kopi Hitam   - Rp 15.000");
+        System.out.println("2. Cappucino    - Rp 20.000");
+        System.out.println("3. Latte        - Rp 22.000");
+        System.out.println("4. Teh Tarik    - Rp 12.000");
+        System.out.println("5. Roti Bakar   - Rp 10.000");
+        System.out.println("6. Mie Goreng   - Rp 18.000");
         System.out.println("===========================");
-        System.out.println("Silahkan pilih menu yang anda inginkan!");
-        System.out.print("\nMasukkan nomor menu yang ingin anda pesan: ");
-        int pilihanMenu = sc.nextInt();
-        System.out.print("Masukkan jumlah item yang ingin anda pesan: ");
-        int banyakItem = sc.nextInt();
 
-        int totalHarga = hitungTotalHarga(pilihanMenu, banyakItem);
+        System.out.print("Berapa jenis menu yang ingin Anda pesan? ");
+        int jumlahJenisMenu = sc.nextInt();
 
-        System.out.println("Total harga untuk pesanan anda: Rp " + totalHarga);
+        int totalKeseluruhan = 0;
 
+        for (int i = 1; i <= jumlahJenisMenu; i++) {
+            System.out.println("\nPesanan ke-" + i);
+            System.out.print("Masukkan nomor menu (1–6): ");
+            int pilihanMenu = sc.nextInt();
+
+            System.out.print("Masukkan jumlah item: ");
+            int jumlahItem = sc.nextInt();
+
+            int totalHarga = hitungTotalHargaNoPresensi(pilihanMenu, jumlahItem, kodePromo);
+
+            System.out.println("Subtotal pesanan ini: Rp " + totalHarga);
+            totalKeseluruhan += totalHarga;
+        }
+
+        System.out.println("\n=== TOTAL KESELURUHAN ===");
+        System.out.println("Total yang harus dibayar: Rp " + totalKeseluruhan);
     }
+
     public static void main(String[] args) {
         menu("Budi", true, "DISKON30");
-
     }
 
-    public static int hitungTotalHarga(int pilihanMenu,int banyakItem ){
-        int [] hargaItems = {15000,20000,22000,12000,10000,18000};
+    public static int hitungTotalHargaNoPresensi(int pilihanMenu, int jumlahPesanan, String kodePromo) {
 
-        int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
-        return hargaTotal;
+        int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
 
+        int totalHarga = hargaItems[pilihanMenu - 1] * jumlahPesanan;
+
+        if (kodePromo.equals("DISKON50")) {
+            System.out.println("Kode promo valid! Anda mendapatkan diskon 50%");
+            totalHarga -= totalHarga * 50 / 100;
+        } else if (kodePromo.equals("DISKON30")) {
+            System.out.println("Kode promo valid! Anda mendapatkan diskon 30%");
+            totalHarga -= totalHarga * 30 / 100;
+        } else {
+            System.out.println("Kode promo invalid. Tidak ada diskon berlaku.");
+        }
+
+        return totalHarga;
     }
-    
 }
+
 
 // jawaban pertanyaan percobaan 1
 // 1.Fungsi tanpa parameter tidak harus bertipe void.
@@ -105,3 +121,27 @@ public class kafe11 {
 // c. Lebih mudah dikembangkan
 // Jika di masa depan ingin menambah fitur (seperti kode promo), dapat dilakukan tanpa mengubah struktur utama fungsi.
 // Tanpa parameter, semua nilai akan hard-coded dan sulit digunakan ulang
+
+// jawaban pertanyaan percobaan 3
+// 1.Fungsi membutuhkan nilai kembalian (return value) jika:
+// Fungsi tersebut harus menghasilkan sebuah nilai yang akan dipakai kembali oleh bagian program lain.
+// Contoh dari program kafe (Percobaan 3):
+// public static int hitungTotalHarga(int pilihanMenu, int banyakItem)
+// public static int hitungTotalHarga(int pilihanMenu, int banyakItem)
+// Fungsi tidak perlu mengembalikan nilai (void) jika:
+// Fungsi hanya melakukan aksi/tugas, seperti menampilkan output, tanpa harus memberikan nilai kembali.
+// Contoh dari program kafe (Percobaan 3):
+// public static void menu(String namaPelanggan, boolean isMember, String kodePromo)
+// Fungsi ini hanya menampilkan menu, meminta input, dan menampilkan hasil. Tidak perlu mengembalikan nilai apa pun.
+// 2.Misalkan fungsi tersebut bentuknya seperti:
+// public static int hitungTotalHargaNoPresensi(int pilihanMenu, int jumlahPesanan)
+// Tipe data nilai kembalian: int
+// Karena yang dihitung adalah total harga dalam bentuk bilangan bulat.
+// Dua parameter yang digunakan:
+// int pilihanMenu
+// Menentukan menu mana yang dipilih (1–6)
+// int jumlahPesanan
+// Menentukan berapa banyak item yang dipesan.
+// Arti parameter dalam konteks program kafe:
+// pilihanMenu dipakai sebagai indeks untuk mengambil harga dari array harga.
+// jumlahPesanan menentukan total harga = harga per item * jumlah.
