@@ -1,7 +1,13 @@
 package jobsheet11;
 
 public class kafe11 {
-    public static void menu(){
+    public static void menu(String namaPelanggan,boolean isMember){
+        System.out.println("selamat datang" + namaPelanggan + "!");
+
+        if (isMember) {
+            System.out.println("Anda adalah member,dapatkan diskon 10% untuk setiap pembelian!");
+        }
+
         System.out.println("=== MENU RESTO KAFE ===");
         System.out.println("1. kopi hitam - Rp 15.000");
         System.out.println("2. cappucino - Rp 20.000");
@@ -12,10 +18,13 @@ public class kafe11 {
         System.out.println("===========================");
         System.out.println("Silahkan pilih menu yang anda inginkan!");
     }
+    public static void main(String[] args) {
+        menu("andi", true);
+    }
     
 }
 
-// jawaban pertanyaan
+// jawaban pertanyaan percobaan 1
 // 1.Fungsi tanpa parameter tidak harus bertipe void.
 // Fungsi boleh saja mengembalikan nilai meskipun tidak memiliki parameter.
 // 2.Ya, dapat.
